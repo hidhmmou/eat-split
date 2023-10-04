@@ -23,6 +23,10 @@ export default function App() {
                         setDisplayedFriend={setDisplayedFriend}
                         setDisplaySplit={setDisplaySplit}
                         displaySplit={displaySplit}
+                        displayed={friends.find(
+                            (friend) => friend.id === displayedFriend
+                        )}
+                        setUpdateApp={setUpdateApp}
                     />
                 )}
                 <AddFriend friends={friends} setFriends={setFriends} />
@@ -49,7 +53,11 @@ function FriendsList({
     setDisplayedFriend,
     setDisplaySplit,
     displaySplit,
+    displayed,
+    setUpdateApp,
 }) {
+    const [openedId, setOpnedId] = useState(-1);
+    const [oldSelected, setOldSelected] = useState(null);
     return (
         friends.length && (
             <ul>
@@ -60,6 +68,12 @@ function FriendsList({
                         key={friend.id}
                         setDisplayedFriend={setDisplayedFriend}
                         setDisplaySplit={setDisplaySplit}
+                        displayed={displayed}
+                        openedId={openedId}
+                        setOpnedId={setOpnedId}
+                        setUpdateApp={setUpdateApp}
+                        oldSelected={oldSelected}
+                        setOldSelected={setOldSelected}
                     />
                 ))}
             </ul>
@@ -67,12 +81,33 @@ function FriendsList({
     );
 }
 
-function Friend({ friend, setDisplayedFriend, setDisplaySplit, displaySplit }) {
+function Friend({
+    friend,
+    setDisplayedFriend,
+    setDisplaySplit,
+    displaySplit,
+    displayed,
+    openedId,
+    setOpnedId,
+    setUpdateApp,
+    oldSelected,
+    setOldSelected,
+}) {
     const [open, setOpen] = useState(false);
-    function SelectFriend() {
+    function SelectFriend(e) {
         setOpen(!open);
+        if (open) setOpnedId(displayed.id);
         setDisplayedFriend(friend.id);
-        setDisplaySplit(!displaySplit);
+        if ((displaySplit && displayed.id === friend.id) || !displaySplit) {
+            setDisplaySplit(!displaySplit);
+        }
+        if (e.target.textContent == "Select") {
+            setOldSelected(e);
+            if (oldSelected) {
+                oldSelected.target.textContent = "Select";
+            }
+            e.target.textContent = "Close";
+        } else e.target.textContent = "Select";
     }
     return (
         <li>
@@ -91,8 +126,8 @@ function Friend({ friend, setDisplayedFriend, setDisplaySplit, displaySplit }) {
             )}
 
             {friend.balance === 0 && <p>you and {friend.name} are even</p>}
-            <button className="button" onClick={() => SelectFriend()}>
-                {!open ? "Select" : "Close"}
+            <button className="button" onClick={(e) => SelectFriend(e)}>
+                Select
             </button>
         </li>
     );
