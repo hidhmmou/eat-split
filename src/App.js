@@ -105,8 +105,7 @@ function AddFriend({ friends, setFriends }) {
         }
         const tmp = "https://i.pravatar.cc/48?u=" + Date.now();
         const newFriend = {
-            // id: friends.length ? friends[friends.length - 1].id + Date.now() : 1,
-            id: Date.now() + 1,
+            id: Date.now(),
             name: friendName,
             image: !hasImg ? tmp : img,
             balance: 0,
@@ -239,9 +238,9 @@ function FormSplitBill({
     function handleExpense(input) {
         const isNumber = /^\d+$/;
 
-        if ((input.match(isNumber) || input === "") && +ammount > +myExpense) {
+        if ((input.match(isNumber) || input === "") && +ammount >= +input) {
             setMyExpense(input);
-            // setUserExpense(10);
+            setUserExpense(ammount - input);
         } else {
             setMoneyLeak("Invalid input !");
             setTimeout(() => setMoneyLeak(""), 2000);
@@ -286,7 +285,7 @@ function FormSplitBill({
             <input
                 type="text"
                 value={userExpense}
-                // disabled="true"
+                disabled="true"
                 onChange={(e) => handleUserExpense(e.target.value)}
             />
 
