@@ -22,6 +22,7 @@ export default function App() {
                         friends={friends}
                         setDisplayedFriend={setDisplayedFriend}
                         setDisplaySplit={setDisplaySplit}
+                        displaySplit={displaySplit}
                     />
                 )}
                 <AddFriend friends={friends} setFriends={setFriends} />
@@ -30,7 +31,6 @@ export default function App() {
                 <FormSplitBill
                     friends={friends}
                     setFriends={setFriends}
-                    // displayed={friends[displayedFriend - 1]}
                     displayed={friends.find(
                         (friend) => friend.id === displayedFriend
                     )}
@@ -44,12 +44,18 @@ export default function App() {
     );
 }
 
-function FriendsList({ friends, setDisplayedFriend, setDisplaySplit }) {
+function FriendsList({
+    friends,
+    setDisplayedFriend,
+    setDisplaySplit,
+    displaySplit,
+}) {
     return (
         friends.length && (
             <ul>
                 {friends.map((friend) => (
                     <Friend
+                        displaySplit={displaySplit}
                         friend={friend}
                         key={friend.id}
                         setDisplayedFriend={setDisplayedFriend}
@@ -61,10 +67,12 @@ function FriendsList({ friends, setDisplayedFriend, setDisplaySplit }) {
     );
 }
 
-function Friend({ friend, setDisplayedFriend, setDisplaySplit }) {
+function Friend({ friend, setDisplayedFriend, setDisplaySplit, displaySplit }) {
+    const [open, setOpen] = useState(false);
     function SelectFriend() {
+        setOpen(!open);
         setDisplayedFriend(friend.id);
-        setDisplaySplit(true);
+        setDisplaySplit(!displaySplit);
     }
     return (
         <li>
@@ -84,7 +92,7 @@ function Friend({ friend, setDisplayedFriend, setDisplaySplit }) {
 
             {friend.balance === 0 && <p>you and {friend.name} are even</p>}
             <button className="button" onClick={() => SelectFriend()}>
-                Select
+                {!open ? "Select" : "Close"}
             </button>
         </li>
     );
