@@ -20,7 +20,7 @@ html {
 }
 
 body {
-    background-image: url("https://previews.123rf.com/images/alexis84/alexis841203/alexis84120300002/12647263-100-dollar-bills-background.jpg"); /* Replace 'path-to-your-image.jpg' with the actual path to your image */
+    /* background-image: url("https://previews.123rf.com/images/alexis84/alexis841203/alexis84120300002/12647263-100-dollar-bills-background.jpg"); Replace 'path-to-your-image.jpg' with the actual path to your image */
     background-size: cover; /* This scales the background image to cover the entire body element */
     background-repeat: no-repeat; /* Prevents the background image from repeating */
     background-attachment: fixed; /* Fixes the background image in place (optional) */
