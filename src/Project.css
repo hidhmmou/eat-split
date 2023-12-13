@@ -1,0 +1,70 @@
+/* Projects.css */
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+body {
+    font-family: "Nunito", Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #336699;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 10px;
+    margin: 5px 5px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    border-radius: 10px;
+}
+
+.project {
+    border: 1px solid #4548ff;
+    border-radius: 15px;
+    color: #4548ff;
+    padding: 1rem;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.project p {
+    color: #000000;
+}
+
+.project:hover {
+    transform: scale(1.05);
+    background-color: #336699;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    color: #fff;
+    border: none;
+}
+
+.project h2 {
+    margin: 0;
+}
+
+.project p {
+    margin-top: 0.5rem;
+}
+
+.project:hover p {
+    margin-top: 0.5rem;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+}
